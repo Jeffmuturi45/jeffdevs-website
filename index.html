@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jeff Devs - Professional Web & Database Services</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- SweetAlert2 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.5/dist/sweetalert2.min.css">
+    
+    <!-- Custom CSS -->
+    <style>
+        :root {
+            --primary-color: #00a650;
+            --secondary-color: #ffcc00;
+            --dark-color: #1a1a1a;
+            --light-color: #f8f9fa;
+            --text-dark: #333;
+            --text-light: #f8f9fa;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            transition: var(--transition);
+            overflow-x: hidden;
+        }
+
+        body.dark-mode {
+            background-color: var(--dark-color);
+            color: var(--text-light);
+        }
+
+        .navbar {
+            background-color: var(--primary-color);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.8rem;
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, var(--primary-color), #007e3a);
+            color: white;
+            padding: 100px 0;
+            margin-bottom: 50px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23007e3a" fill-opacity="0.1" d="M0,96L48,112C96,128,192,160,288,186.7C384,213,480,235,576,213.3C672,192,768,128,864,128C960,128,1056,192,1152,197.3C1248,203,1344,149,1392,122.7L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .typewriter-text {
+            border-right: 3px solid white;
+            white-space: nowrap;
+            overflow: hidden;
+            display: inline-block;
+            animation: blink-caret 0.75s step-end infinite;
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent; }
+            50% { border-color: white; }
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: var(--primary-color);
+            margin: 15px auto;
+            border-radius: 2px;
+        }
+
+        .package-card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            margin-bottom: 30px;
+            overflow: hidden;
+            height: 100%;
+        }
+
+        .package-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .package-header {
+            padding: 20px;
+            text-align: center;
+            color: white;
+        }
+
+        .package-price {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin: 15px 0;
+        }
+
+        .package-features {
+            padding: 20px;
+        }
+
+        .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .feature-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+        }
+
+        .feature-list li:last-child {
+            border-bottom: none;
+        }
+
+        .feature-list .included {
+            color: var(--primary-color);
+            margin-right: 10px;
+        }
+
+        .feature-list .not-included {
+            color: #dc3545;
+            margin-right: 10px;
+        }
+
+        .testimonial-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: var(--shadow);
+            margin-bottom: 30px;
+            transition: var(--transition);
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+        }
+
+        body.dark-mode .testimonial-card {
+            background-color: #2a2a2a;
+            color: var(--text-light);
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+
+        .testimonial-author {
+            font-weight: 600;
+        }
+
+        .payment-form {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: var(--shadow);
+            margin-bottom: 50px;
+        }
+
+        body.dark-mode .payment-form {
+            background-color: #2a2a2a;
+            color: var(--text-light);
+        }
+
+        .form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.25rem rgba(0, 166, 80, 0.25);
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            transition: var(--transition);
+        }
+
+        .btn-primary:hover {
+            background-color: #008e44;
+            border-color: #008e44;
+            transform: translateY(-2px);
+        }
+
+        .footer {
+            background-color: var(--dark-color);
+            color: var(--text-light);
+            padding: 50px 0 20px;
+        }
+
+        .footer a {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer a:hover {
+            color: var(--secondary-color);
+        }
+
+        .social-links a {
+            display: inline-block;
+            margin-right: 15px;
+            font-size: 1.2rem;
+        }
+
+        .theme-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        .whatsapp-float {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 1000;
+            background-color: #25D366;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow);
+            font-size: 1.8rem;
+            text-decoration: none;
+            transition: var(--transition);
+            animation: pulse 2s infinite;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(37, 211, 102, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
+
+        /* Modern Loader */
+        .loader {
+            display: none;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+            margin-right: 10px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Enhanced Loader for Payment */
+        .payment-loader {
+            display: none;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .payment-loader .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(0, 166, 80, 0.2);
+            border-radius: 50%;
+            border-top-color: var(--primary-color);
+            animation: spin 1s linear infinite;
+            margin: 0 auto 15px;
+        }
+
+        body.dark-mode .package-card,
+        body.dark-mode .payment-form {
+            background-color: #2a2a2a;
+        }
+
+        body.dark-mode .form-control {
+            background-color: #3a3a3a;
+            border-color: #4a4a4a;
+            color: var(--text-light);
+        }
+
+        body.dark-mode .form-control:focus {
+            background-color: #3a3a3a;
+            color: var(--text-light);
+        }
+
+        /* Scroll to top button */
+        .scroll-to-top {
+            position: fixed;
+            bottom: 90px;
+            right: 20px;
+            z-index: 1000;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .scroll-to-top:hover {
+            transform: translateY(-3px);
+        }
+
+        /* Smooth scroll behavior */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Success Animation */
+        .success-animation {
+            display: none;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .success-animation .checkmark {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: block;
+            stroke-width: 2;
+            stroke: #4bb71b;
+            stroke-miterlimit: 10;
+            box-shadow: inset 0px 0px 0px #4bb71b;
+            animation: fill .4s ease-in-out .4s forwards, scale .3s ease-in-out .9s both;
+            margin: 0 auto;
+        }
+
+        .success-animation .checkmark__circle {
+            stroke-dasharray: 166;
+            stroke-dashoffset: 166;
+            stroke-width: 2;
+            stroke-miterlimit: 10;
+            stroke: #4bb71b;
+            fill: none;
+            animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+        }
+
+        .success-animation .checkmark__check {
+            transform-origin: 50% 50%;
+            stroke-dasharray: 48;
+            stroke-dashoffset: 48;
+            animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
+        }
+
+        @keyframes stroke {
+            100% { stroke-dashoffset: 0; }
+        }
+
+        @keyframes scale {
+            0%, 100% { transform: none; }
+            50% { transform: scale3d(1.1, 1.1, 1); }
+        }
+
+        @keyframes fill {
+            100% { box-shadow: inset 0px 0px 0px 30px #4bb71b; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-code me-2"></i>Jeff Devs
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#packages">Packages</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#testimonials">Testimonials</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#payment">Get Started</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="container hero-content">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <h1 class="display-4 fw-bold">Professional Web & Database Services</h1>
+                    <p class="lead typewriter-text" id="typewriter">Expand your business with our reliable web solutions.</p>
+                    <a href="#payment" class="btn btn-light btn-lg mt-3">Get Started <i class="fas fa-arrow-right ms-2"></i></a>
+                </div>
+                <div class="col-lg-6 text-center">
+                    <img src="./download.jpg" alt="Web Development Services" class="img-fluid rounded shadow" style="max-height: 400px;">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Packages Section -->
+    <section id="packages" class="py-5">
+        <div class="container">
+            <h2 class="section-title">Our Packages</h2>
+            <div class="row">
+                <!-- Basic Package -->
+                <div class="col-md-4">
+                    <div class="package-card">
+                        <div class="package-header bg-primary">
+                            <h3>Basic</h3>
+                            <div class="package-price">KSh 1,999</div>
+                            <p>Entry level services</p>
+                        </div>
+                        <div class="package-features">
+                            <ul class="feature-list">
+                                <li><i class="fas fa-check-circle included"></i> WordPress installation</li>
+                                <li><i class="fas fa-check-circle included"></i> Database creation (MySQL)</li>
+                                <li><i class="fas fa-check-circle included"></i> Small bug fixes</li>
+                                <li><i class="fas fa-times-circle not-included"></i> Advanced customizations</li>
+                                <li><i class="fas fa-times-circle not-included"></i> MPESA integration</li>
+                                <li><i class="fas fa-times-circle not-included"></i> Ongoing support</li>
+                            </ul>
+                            <button class="btn btn-outline-dark w-100 mt-3" onclick="selectPackage('basic')">Select Basic</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Standard Package -->
+                <div class="col-md-4">
+                    <div class="package-card">
+                        <div class="package-header bg-success">
+                            <h3>Standard</h3>
+                            <div class="package-price">KSh 4,999</div>
+                            <p>Best for small businesses</p>
+                        </div>
+                        <div class="package-features">
+                            <ul class="feature-list">
+                                <li><i class="fas fa-check-circle included"></i> All Basic features</li>
+                                <li><i class="fas fa-check-circle included"></i> Full WordPress fixes</li>
+                                <li><i class="fas fa-check-circle included"></i> MPESA Sandbox setup</li>
+                                <li><i class="fas fa-check-circle included"></i> Custom theme adjustments</li>
+                                <li><i class="fas fa-times-circle not-included"></i> Full ecommerce store setup</li>
+                                <li><i class="fas fa-times-circle not-included"></i> Dedicated support</li>
+                            </ul>
+                            <button class="btn btn-outline-dark w-100 mt-3" onclick="selectPackage('standard')">Select Standard</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Premium Package -->
+                <div class="col-md-4">
+                    <div class="package-card">
+                        <div class="package-header bg-warning text-dark">
+                            <h3>Premium</h3>
+                            <div class="package-price">KSh 9,999</div>
+                            <p>Complete solution</p>
+                        </div>
+                        <div class="package-features">
+                            <ul class="feature-list">
+                                <li><i class="fas fa-check-circle included"></i> All Standard features</li>
+                                <li><i class="fas fa-check-circle included"></i> Ecommerce setup (WooCommerce)</li>
+                                <li><i class="fas fa-check-circle included"></i> MPESA live integration</li>
+                                <li><i class="fas fa-check-circle included"></i> Speed optimization</li>
+                                <li><i class="fas fa-check-circle included"></i> 1-month free support</li>
+                                <li><i class="fas fa-check-circle included"></i> Custom database solutions</li>
+                            </ul>
+                            <button class="btn btn-outline-dark w-100 mt-3" onclick="selectPackage('premium')">Select Premium</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="section-title">What Our Clients Say</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="testimonial-card">
+                        <div class="testimonial-text">
+                            "Jeff Devs transformed my small business website. The Premium package gave me all the features I needed at an affordable price."
+                        </div>
+                        <div class="testimonial-author">- Jane Wanjiku, Nairobi</div>
+                        <div class="rating">
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="testimonial-card">
+                        <div class="testimonial-text">
+                            "The MPESA integration for my e-commerce store was seamless. Highly recommended for anyone needing professional web services!"
+                        </div>
+                        <div class="testimonial-author">- David Kimani, Mombasa</div>
+                        <div class="rating">
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="testimonial-card">
+                        <div class="testimonial-text">
+                            "The Basic package was perfect for my startup. Simple, affordable, and reliable. Customer support is excellent too!"
+                        </div>
+                        <div class="testimonial-author">- Grace Akinyi, Kisumu</div>
+                        <div class="rating">
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star-half-alt text-warning"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Payment Form Section -->
+    <section id="payment" class="py-5">
+        <div class="container">
+            <h2 class="section-title">Get Started Today</h2>
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="payment-form">
+                        <form id="paymentForm">
+                            <div class="mb-3">
+                                <label for="username" class="form-label">Your Name</label>
+                                <input type="text" class="form-control" id="username" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="phoneNumber" class="form-label">Phone Number</label>
+                                <input type="tel" class="form-control" id="phoneNumber" pattern="07[0-9]{8}" placeholder="07XXXXXXXX" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="packageSelect" class="form-label">Selected Package</label>
+                                <select class="form-select" id="packageSelect" required>
+                                    <option value="" selected disabled>Choose a package</option>
+                                    <option value="basic">Basic - KSh 1,999</option>
+                                    <option value="standard">Standard - KSh 4,999</option>
+                                    <option value="premium">Premium - KSh 9,999</option>
+                                </select>
+                            </div>
+                            
+                            <!-- Payment Loader -->
+                            <div class="payment-loader" id="paymentLoader">
+                                <div class="spinner"></div>
+                                <p>Processing your request...</p>
+                            </div>
+                            
+                            <!-- Success Animation -->
+                            <div class="success-animation" id="successAnimation">
+                                <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                                    <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none"/>
+                                    <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+                                </svg>
+                                <p>Payment request sent successfully!</p>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary w-100 py-3 d-flex align-items-center justify-content-center" id="submitBtn">
+                                <span class="loader" id="buttonLoader"></span>
+                                <span id="paymentText">Proceed to Payment</span>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <h5>Jeff Devs</h5>
+                    <p>Your trusted partner for professional web and database solutions in Kenya.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#packages">Packages</a></li>
+                        <li><a href="#testimonials">Testimonials</a></li>
+                        <li><a href="#payment">Get Started</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5>Contact Us</h5>
+                    <ul class="list-unstyled">
+                        <li><i class="fas fa-phone me-2"></i> +254 710 098 409</li>
+                        <li><i class="fas fa-envelope me-2"></i> info@jeffdevs.co.ke</li>
+                        <li><i class="fas fa-map-marker-alt me-2"></i> Nairobi, Kenya</li>
+                    </ul>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-md-6">
+                    <p>&copy; 2025 Jeff Devs. All rights reserved. Created and designed by <a href="https://2025portfolio-8j1.pages.dev">Jeff Muturi</a></p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <a href="#" class="me-3">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <button class="scroll-to-top" id="scrollToTop">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Theme Toggle Button -->
+    <button class="theme-toggle" id="themeToggle">
+        <i class="fas fa-moon" id="themeIcon"></i>
+    </button>
+
+    <!-- WhatsApp Float Button -->
+    <a href="https://wa.me/25410098409?text=Hello%2C%20I%20need%20help%20with%20web%20development%20services" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.5/dist/sweetalert2.all.min.js"></script>
+    
+    <!-- Custom JS -->
+    <script>
+        // Typewriter Effect
+        const typewriterText = document.getElementById('typewriter');
+        const texts = [
+            "Expand your business with our reliable web solutions.",
+            "Professional WordPress and database services.",
+            "MPESA integration for your e-commerce store.",
+            "Fast, secure, and affordable web development."
+        ];
+        
+        let textIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        
+        function typeWriter() {
+            const currentText = texts[textIndex];
+            
+            if (isDeleting) {
+                typewriterText.textContent = currentText.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                typewriterText.textContent = currentText.substring(0, charIndex + 1);
+                charIndex++;
+            }
+            
+            if (!isDeleting && charIndex === currentText.length) {
+                isDeleting = true;
+                setTimeout(typeWriter, 2000);
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                textIndex = (textIndex + 1) % texts.length;
+                setTimeout(typeWriter, 500);
+            } else {
+                setTimeout(typeWriter, isDeleting ? 50 : 100);
+            }
+        }
+        
+        // Start typewriter effect
+        window.addEventListener('load', typeWriter);
+        
+        // Dark/Light Mode Toggle
+        document.getElementById('themeToggle').addEventListener('click', function() {
+            document.body.classList.toggle('dark-mode');
+            const themeIcon = document.getElementById('themeIcon');
+            
+            if (document.body.classList.contains('dark-mode')) {
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+                localStorage.setItem('theme', 'light');
+            }
+        });
+        
+        // Check for saved theme preference
+        if (localStorage.getItem('theme') === 'dark') {
+            document.body.classList.add('dark-mode');
+            document.getElementById('themeIcon').classList.remove('fa-moon');
+            document.getElementById('themeIcon').classList.add('fa-sun');
+        }
+        
+        // Package Selection
+        function selectPackage(pkg) {
+            document.getElementById('packageSelect').value = pkg;
+            document.getElementById('payment').scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        // Scroll to Top Button
+        const scrollToTopBtn = document.getElementById('scrollToTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                scrollToTopBtn.style.display = 'flex';
+            } else {
+                scrollToTopBtn.style.display = 'none';
+            }
+        });
+        
+        scrollToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Enhanced Payment Form Submission
+        document.getElementById('paymentForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('username').value;
+            const phone = document.getElementById('phoneNumber').value;
+            const pkg = document.getElementById('packageSelect').value;
+            const submitBtn = document.getElementById('submitBtn');
+            const buttonLoader = document.getElementById('buttonLoader');
+            const paymentText = document.getElementById('paymentText');
+            const paymentLoader = document.getElementById('paymentLoader');
+            const successAnimation = document.getElementById('successAnimation');
+            
+            // Validate phone number format
+            const phoneRegex = /^07[0-9]{8}$/;
+            if (!phoneRegex.test(phone)) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Invalid Phone Number',
+                    text: 'Please enter a valid Kenyan phone number (format: 07XXXXXXXX)',
+                });
+                return;
+            }
+            
+            // Disable submit button and show loader
+            submitBtn.disabled = true;
+            buttonLoader.style.display = 'inline-block';
+            paymentText.textContent = 'Processing...';
+            
+            // Show payment loader after a short delay
+            setTimeout(() => {
+                paymentLoader.style.display = 'block';
+            }, 500);
+            
+            // Simulate API call to payment service
+            setTimeout(() => {
+                // Hide loaders and show success animation
+                buttonLoader.style.display = 'none';
+                paymentLoader.style.display = 'none';
+                successAnimation.style.display = 'block';
+                
+                // Reset button after success
+                setTimeout(() => {
+                    submitBtn.disabled = false;
+                    paymentText.textContent = 'Proceed to Payment';
+                    successAnimation.style.display = 'none';
+                    
+                    // Show success message
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Payment Request Sent!',
+                        text: 'Please check your phone to complete the payment.',
+                        showConfirmButton: true,
+                        confirmButtonText: 'OK',
+                        timer: 5000
+                    }).then(() => {
+                        // Redirect to WhatsApp with prefilled message
+                        const pkgNames = {
+                            'basic': 'Basic',
+                            'standard': 'Standard', 
+                            'premium': 'Premium'
+                        };
+                        
+                        const msg = `Hello, I purchased the ${pkgNames[pkg]} package. Name: ${username}, Phone: ${phone}`;
+                        const waUrl = `https://wa.me/2547100984091?text=${encodeURIComponent(msg)}`;
+                        window.open(waUrl, '_blank');
+                    });
+                }, 2000);
+            }, 3000);
+        });
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
